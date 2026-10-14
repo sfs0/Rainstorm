@@ -12,7 +12,7 @@ from engine import analyse, parse_upload, make_advice
 import qwen_advice as qwen
 
 SAMPLE = Path(__file__).resolve().parents[1] / 'example.csv'
-VALID = {field: '根据上传观测保持常规关注，核对现场情况，并以当地正式指令和最新信息安排相关工作。' for field in qwen.FIELDS}
+VALID = {field: '根据本次上传站点的观测保持常规关注，核对现场情况，并以当地正式指令和最新信息安排相关工作。' for field in qwen.FIELDS}
 
 
 class QwenTests(unittest.TestCase):
@@ -75,6 +75,12 @@ class QwenTests(unittest.TestCase):
         self.assertIn('鉴权失败', payload)
         self.assertNotIn('private upstream content', payload)
         self.assertNotIn('unit-test-placeholder', payload)
+
+    def test_whole_basin_claim_is_rejected(self):
+        for value in ['长江流域整体处于低风险，应持续核对现场情况，并采取常规巡查措施。',
+                      '长江流域目前处于低风险，本次上传站点应继续核对现场情况。']:
+            with self.subTest(value=value), self.assertRaises(qwen.AdviceError):
+                qwen.validate_advice(json.dumps(dict(VALID, public=value)), self.result)
 
     def test_request_uses_requested_model_and_bearer_auth(self):
         os.environ['DASHSCOPE_API_KEY'] = 'unit-test-placeholder'
