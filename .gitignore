@@ -1,6 +1,7 @@
 # Recovery credentials and local work must never be published.
 .env
 .env.*
+rainstorm-warning.env
 *.pem
 *.key
 recovery-key*.json

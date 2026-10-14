@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--url', required=True)
+    parser.add_argument('--skip-files', action='store_true', help='Only exercise API and sample; omit full asset download')
     args = parser.parse_args()
     base = args.url.rstrip('/')
 
@@ -22,10 +23,11 @@ def main():
             return response.status, response.read()
 
     manifest = json.loads((ROOT / 'build/build-manifest.json').read_text())
-    for name, expected in manifest['frontend_files'].items():
+    for name, expected in ([] if args.skip_files else manifest['frontend_files'].items()):
         _, raw = request('/' + name + '?build=' + manifest['version'])
         assert hashlib.sha256(raw).hexdigest() == expected, name
-    print('Frontend files match:', len(manifest['frontend_files']), manifest['version'])
+    if not args.skip_files:
+        print('Frontend files match:', len(manifest['frontend_files']), manifest['version'])
     _, raw = request('/rain-warning-api/health')
     assert json.loads(raw)['status'] == 'ok'
     sample = (ROOT / 'warning-service/example.csv').read_bytes()
@@ -46,7 +48,7 @@ def main():
     assert job['progress'] == 100
     result = job['result']
     assert [x['max_risk_index'] for x in result['reaches']] == [22.5, 22.17, 9.33]
-    assert result['generation']['method'] == 'rule'
+    assert result['generation']['method'] in ['rule', 'qwen']
     assert all(result['advice'][x] for x in ['overview', 'public', 'traffic', 'water', 'emergency', 'uncertainty'])
     try:
         request('/rain-warning-api/validate', b'wrong,columns\n1,2\n')

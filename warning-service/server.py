@@ -14,7 +14,8 @@ from socketserver import ThreadingMixIn
 from urllib.parse import unquote, urlsplit
 from pathlib import Path
 
-from engine import parse_upload, analyse, make_advice, InputError
+from engine import parse_upload, analyse, InputError
+from qwen_advice import generate_advice, public_settings
 
 MAX_BYTES = 10 * 1024 * 1024
 LOCK = threading.Lock()
@@ -53,7 +54,7 @@ def execute(job, groups):
         result = analyse(groups, job['meta'])
         job.update(stage='advice', progress=75, message='风险计算完成，正在生成分对象建议', result=result)
         save(job)
-        result = make_advice(result)
+        result = generate_advice(result)
         job.update(status='complete', stage='complete', progress=100, message='分析完成', result=result)
         save(job)
     except Exception:
@@ -77,7 +78,9 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = urlsplit(self.path).path
         if path == '/health':
-            return self.json_response(200, {'status': 'ok', 'version': '1.0', 'advice_method': 'rule'})
+            info = {'status': 'ok', 'version': '1.1'}
+            info.update(public_settings())
+            return self.json_response(200, info)
         if path.startswith('/jobs/'):
             job_id = path.split('/')[-1]
             if len(job_id) != 32 or any(c not in '0123456789abcdef' for c in job_id):

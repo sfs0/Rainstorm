@@ -14,7 +14,31 @@
 
 示例来自已有历史观测：万州、宜昌、南京共 72 条，2026-03-13 至 2026-03-16，上、中、下游最高风险指数分别为 22.5、22.17、9.33，均为低风险。示例供格式和流程试用，日期不是当前日期。
 
-当前建议由观测证据和规则生成，页面明确标记“基于观测证据的规则建议”。尚未接入 Qwen；没有配置或传输模型密钥，也没有外部模型请求。风险等级是本方法的观测风险分级，不是气象部门发布的官方预警信号。
+分类建议已接入 `qwen-max`，模型接收结构化观测证据，生成公众、交通、水利、应急建议；程序计算的数字、等级、综合证据和不确定性说明继续保留。风险等级是本方法的观测风险分级，不是气象部门发布的官方预警信号。模型输出接受 JSON 结构、数字/量值、目录站名、其他流域及明确预报/官方预警表述检查；不代表完全的事实核查或人工审核。格式或约束不通过时重写一次，再失败回退规则。未配置密钥、鉴权失败、限流或网络异常时也回退规则，页面显示原因，不输出上游响应正文或密钥。
+
+## 配置 qwen-max
+
+在服务器 `8.130.160.137` 以 root 编辑 `/etc/rainstorm-warning.env`（已建立，权限 root:root 600）：
+
+```ini
+DASHSCOPE_API_KEY=在这里填写真实百炼密钥
+QWEN_MODEL=qwen-max
+QWEN_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1
+```
+
+默认使用北京地域；密钥必须来自相同地域。其他地域或业务空间专属域名可以按照 [百炼官方兼容接口说明](https://www.alibabacloud.com/help/zh/model-studio/compatibility-of-openai-with-dashscope) 修改 BASE_URL。实际密钥不放入 Git、网页、截图或聊天；仓库只提供空白模板 `deployment/rainstorm-warning.env.example`。
+
+填写后执行：
+
+```bash
+systemctl restart rainstorm-warning
+systemctl is-active rainstorm-warning
+curl -s http://127.0.0.1:8096/health
+```
+
+健康接口 `model_configured:true` 只表示服务读到非空密钥，不表示阿里云鉴权或模型权限已验证。然后网页重新点击“使用示例试跑”或提交新任务。成功时标记 `qwen-max · 大模型建议`，失败显示规则回退原因。旧任务保存原结果，不自动重新调用模型。
+
+systemd 通过 `EnvironmentFile` 读取密钥，服务仍以 nginx 用户运行。模板只在文件不存在时创建，后续部署不覆盖已填密钥。模型接口为 HTTPS，禁止 HTTP 重定向，限制为百炼域名，防止配置错误时向其他域名发送凭据。
 
 ## 结构与部署
 
@@ -33,10 +57,12 @@ python scripts/deploy_warning.py
 python scripts/smoke_warning.py --url http://8.130.160.137
 ```
 
-部署脚本从标准输入读 SSH 密码，不保存密码；需要本地 paramiko。每次切换都保留当时网页和单个 Nginx 配置，路径记录于 `build/deployment-record.json`。当前线上构建 `c63915ed3194`，切换前备份 `/data/web/releases/before-warning-20261014T150001Z`。基线回退见 [ROLLBACK.md](ROLLBACK.md)；回退后如需停用新增服务，可执行 `systemctl disable --now rainstorm-warning`。
+部署脚本从标准输入读 SSH 密码，不保存密码；需要本地 paramiko。每次切换都保留当时网页、单个 Nginx 配置，以及已有预警 Python 文件与服务单元，路径记录于 `build/deployment-record.json`。当前前端构建 `26baec3a9645`。实际密钥文件不复制到备份中。基线回退见 [ROLLBACK.md](ROLLBACK.md)；回退后如需停用新增服务，可执行 `systemctl disable --now rainstorm-warning`。
 
 ## 验证范围
 
 15 项输入与评分测试通过，长江和黄河原始历史数据的河段最大评分与原方法对照一致。公网验证逐文件 SHA-256、示例下载、CSV 校验、异步任务完成、分类建议、无效 CSV 拒绝。本地使用相同编译页面验证四个标签、示例试跑、结果展示、建议切换和刷新恢复。真实站点第四个标签由用户确认可见。
+
+Qwen 接入新增 8 项测试，覆盖请求的模型和鉴权头、无密钥回退、成功生成并保持分数、重写与回退、不合法证据拒绝、鉴权错误脱敏、域名与重定向限制，共 23 项通过。测试使用模拟响应，真实 Qwen 调用需管理员填写有效密钥后验证；部署时不代填密钥、不产生模型调用费用。
 
 本地浏览器测试 `scripts/preview_web.py` 只模拟本地页面登录与旧 API 的空记录，新的预警请求转发给本地预警服务；不部署到服务器、不读取或复制线上登录状态。浏览器扩展未开启本地文件访问权限，未自动验证从操作系统文件选择器上传；示例试跑经过同一个文件校验与分析处理链路。未重新运行原三个图像模型的业务推理。

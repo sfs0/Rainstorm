@@ -9,6 +9,7 @@ Group=nginx
 WorkingDirectory=/opt/rainstorm-warning
 Environment=PYTHONUNBUFFERED=1
 Environment=RAIN_WARNING_DATA=/var/lib/rainstorm-warning
+EnvironmentFile=-/etc/rainstorm-warning.env
 ExecStart=/usr/bin/python3 /opt/rainstorm-warning/server.py --port 8096
 Restart=on-failure
 RestartSec=3

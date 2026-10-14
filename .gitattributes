@@ -11,4 +11,5 @@ scripts/*.sh text eol=lf
 frontend/extensions/*.js text eol=lf
 frontend/extensions/*.css text eol=lf
 deployment/*.service text eol=lf
+deployment/*.example text eol=lf
 warning-service/example.csv -text whitespace=cr-at-eol

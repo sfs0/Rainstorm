@@ -212,6 +212,7 @@ export const WarningResults = component({
         ])),
         el('div', { class: 'rain-section-heading' }, [el('h2', {}, '预警建议'),
           el('span', { class: 'rain-method-label' }, result.generation ? result.generation.label : '正在生成建议…')]),
+        result.generation && result.generation.reason ? el('p', { class: 'rain-warning-note' }, result.generation.reason) : null,
         result.advice ? el('div', { class: 'rain-advice' }, [
           el('nav', { class: 'rain-audience-tabs', 'aria-label': '预警建议类型' }, Object.entries(audienceNames).map(([key, label]) =>
             button(label, () => { state.value.audience = key; }, { class: s.audience === key ? 'active' : '', 'aria-pressed': s.audience === key }))),

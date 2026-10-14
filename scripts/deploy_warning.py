@@ -38,9 +38,10 @@ buffer = io.BytesIO()
 with tarfile.open(fileobj=buffer, mode='w:gz') as archive:
     for path in (ROOT / 'build/web/dist').rglob('*'):
         if path.is_file(): archive.add(path, arcname='web/' + path.relative_to(ROOT / 'build/web/dist').as_posix())
-    for name in ['server.py', 'engine.py', 'station_catalog.json', 'example.csv']:
+    for name in ['server.py', 'engine.py', 'qwen_advice.py', 'station_catalog.json', 'example.csv']:
         archive.add(ROOT / 'warning-service' / name, arcname='service/' + name)
     archive.add(ROOT / 'deployment/rainstorm-warning.service', arcname='rainstorm-warning.service')
+    archive.add(ROOT / 'deployment/rainstorm-warning.env.example', arcname='rainstorm-warning.env.example')
     archive.add(ROOT / 'build/web-warning.conf', arcname='web-warning.conf')
 raw = buffer.getvalue()
 release_file = ROOT / 'build' / ('rain-warning-' + version + '.tar.gz')
@@ -66,12 +67,22 @@ actual=$(sha256sum __ARCHIVE__ | cut -d ' ' -f1)
 test "$actual" = '__SHA__'
 mkdir -p __STAGING__
 tar -xzf __ARCHIVE__ -C __STAGING__
+mkdir -p __BACKUP__/warning-service
+if test -d /opt/rainstorm-warning; then
+    cp -p /opt/rainstorm-warning/*.py __BACKUP__/warning-service/
+fi
+if test -f /etc/systemd/system/rainstorm-warning.service; then
+    cp -p /etc/systemd/system/rainstorm-warning.service __BACKUP__/rainstorm-warning.service
+fi
 install -d -m 755 /opt/rainstorm-warning
 install -d -o nginx -g nginx -m 750 /var/lib/rainstorm-warning
 cp __STAGING__/service/* /opt/rainstorm-warning/
 chmod 644 /opt/rainstorm-warning/*
-/usr/bin/python3 -m py_compile /opt/rainstorm-warning/engine.py /opt/rainstorm-warning/server.py
+/usr/bin/python3 -m py_compile /opt/rainstorm-warning/engine.py /opt/rainstorm-warning/server.py /opt/rainstorm-warning/qwen_advice.py
 cp __STAGING__/rainstorm-warning.service /etc/systemd/system/rainstorm-warning.service
+if test ! -e /etc/rainstorm-warning.env; then
+    install -o root -g root -m 600 __STAGING__/rainstorm-warning.env.example /etc/rainstorm-warning.env
+fi
 systemctl daemon-reload
 systemctl enable rainstorm-warning
 systemctl restart rainstorm-warning
