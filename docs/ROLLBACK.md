@@ -44,7 +44,7 @@ curl -I http://127.0.0.1/home/analyse
 curl -I http://127.0.0.1/assets/index-Me4TUIQZ.js
 ```
 
-随后从外网打开 `http://8.130.160.137/home/analyse`，确认页面和原有功能。不要只以首页 HTTP 200 判定业务计算已恢复。
+随后从外网打开 `http://8.130.160.137/#/home/analyse`，确认页面和原有功能。不要只以首页 HTTP 200 判定业务计算已恢复。
 
 ## 校验与已知边界
 

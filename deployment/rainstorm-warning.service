@@ -1,0 +1,22 @@
+[Unit]
+Description=Rainstorm CSV Warning API
+After=network.target
+
+[Service]
+Type=simple
+User=nginx
+Group=nginx
+WorkingDirectory=/opt/rainstorm-warning
+Environment=PYTHONUNBUFFERED=1
+Environment=RAIN_WARNING_DATA=/var/lib/rainstorm-warning
+ExecStart=/usr/bin/python3 /opt/rainstorm-warning/server.py --port 8096
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+ReadWriteDirectories=/var/lib/rainstorm-warning
+
+[Install]
+WantedBy=multi-user.target
