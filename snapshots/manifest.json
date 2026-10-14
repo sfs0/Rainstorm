@@ -1,0 +1,239 @@
+{
+  "snapshot_id": "web-8.130.160.137-20261014-before-rain-warning",
+  "captured_at_utc": "2026-10-14T13:04:20.318772+00:00",
+  "server": "8.130.160.137",
+  "scope": "Current web frontend and its Nginx route only",
+  "archive": "snapshots/web-8.130.160.137-20261014-before-rain-warning.tar.gz",
+  "archive_bytes": 2464435,
+  "archive_sha256": "85bc338f9a93ff7712852ff91fd379b07929e5d55d35ead34f7df74eb3213768",
+  "files": [
+    {
+      "path": "data/web/dist/index.html",
+      "bytes": 424,
+      "sha256": "2400be069a7cec86a0e9dcfb7267b5939ca6845ee3dcb6d51fca11751e145646",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/index-nmGmSpxQ.js",
+      "bytes": 452098,
+      "sha256": "13405dfcfd91bd3b4cead4c70beb6760afcb15a6e007b299ba4cff65324ee5fe",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/el-input-2x9I2_KN.css",
+      "bytes": 10634,
+      "sha256": "7173329a22e04d852bd33292d4417a239b40f2cb09b4ffa12b9b3745e6e2f2a2",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/index-Me4TUIQZ.js",
+      "bytes": 1185742,
+      "sha256": "3766334ce9f9f79fe9bd900112a20fac3671f71cb26db4b72ff9ee461ccb5ca3",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/el-upload-CorkyK7E.css",
+      "bytes": 36114,
+      "sha256": "0744655befa9e7ce1afec6f694ff3ca190c03ac4766edf883c3a4a4f4e52548f",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/Register-KAB1JySH.css",
+      "bytes": 617,
+      "sha256": "14f8e0335947f120d9d202b4b887271693f608fe8f390ea534da29496ec54c5b",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/Login-5vWa3qWC.css",
+      "bytes": 617,
+      "sha256": "2219b77fbc1f67b56e7cc83b89b0e155581f42bb93f710507c503cb6a47c4664",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/data-FGwaR1-K.css",
+      "bytes": 37439,
+      "sha256": "68cb7f07c9ff41b75549352f824886cff9626fe04a4b5a50b033e6fccd82b84e",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/index-LX4ZBC5r.css",
+      "bytes": 1020,
+      "sha256": "d6af51c651b88208da418acf397fcf911911f502e659e09c781f3308734334de",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/data-M-yxV3ju.js",
+      "bytes": 9794,
+      "sha256": "86ed91727b55a53d0e45e32a10e13a8382601bbee9ed246de3a61b76158978ce",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/el-upload-istCZwtw.js",
+      "bytes": 2069,
+      "sha256": "e7b750020b553b3f169161e28377674de7d152281664357869a7ed051cde7799",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/Register-VxQ7eNA0.js",
+      "bytes": 2074,
+      "sha256": "67f8be1e52b85a43e1c428245f36f89497ac28950c643897fe24125f101b4ed2",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/index-Ef8q-7NN.css",
+      "bytes": 8195,
+      "sha256": "cb95297f7f5f93b79afe5d1dd10a0bc006b315515206635e583b4b2f902518b7",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/user-ENcvZ11n.js",
+      "bytes": 685,
+      "sha256": "fa7f0e429e8374eca9f3391c1ad1da86f31b020f53e0453943d0c680c47b25e3",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/1-4s0jzZHg.jpg",
+      "bytes": 24224,
+      "sha256": "c912fae3828f6d516497fdb8e352a374e8799418d8c3472438c31c1f25017d7b",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/2-j4VcBKe6.jpg",
+      "bytes": 76259,
+      "sha256": "4098808fd8848a30e4034c498a229b6477dc693ed62b9f5ea7907a2269a69292",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/analyse-3KlRs-Ts.css",
+      "bytes": 46681,
+      "sha256": "631e81ee650250d70f150c953484eaa7f32d382abf5d0b16c172b7c1aa7506d8",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/3-gZDCU9_J.jpg",
+      "bytes": 60991,
+      "sha256": "85bac0117dc6a4faee91f3a8ce3eef19ca5f01b659afd5491767e001c3eac4a6",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/yaogan-pqTr_O1T.png",
+      "bytes": 5292,
+      "sha256": "624d8984052afdd5c1e5011f8c752c3a3852dc67b5db9f5aad1b86deaa92cf41",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/index-wOqp9ZLG.css",
+      "bytes": 526689,
+      "sha256": "db499d16af9078269ee65539ad2c75c99f14c0a070d2aef16b8b9e735e53c29d",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/index-5bY3DMb7.js",
+      "bytes": 1657,
+      "sha256": "7f888e02e79a5811399bfe9e5eabfe67b0b944f9218d775e26499edeef12245d",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/request-WweSZW2h.js",
+      "bytes": 35304,
+      "sha256": "42af26ee3344989dc04c71d24a623de7f976cc226e4bbce993eb08a97458a3c6",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/index-owmzFT96.js",
+      "bytes": 570,
+      "sha256": "e9f78196c7f115d540a6ae586011bdf7af1041ee246387563a86bd20dfe7ce7b",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/login-MsFL-otB.js",
+      "bytes": 70477,
+      "sha256": "b79c747e43afd4c54b0de0ec7fe94b4650af54fbd26fbbb0c483164768b88ccc",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/index-EG3zEqbk.js",
+      "bytes": 1998,
+      "sha256": "4b61b1317718f50e8c74edabe51c744556ffa2620a9562904200df51392d5d37",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/Login-xVim7NLg.js",
+      "bytes": 2323,
+      "sha256": "f015bdfb621d14f3ac53b0b80c2f64607aaf47dc434303ddeec78fafb6f0aeed",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/analyse-IVbRPvcA.js",
+      "bytes": 66073,
+      "sha256": "91cd14c6596db0bbdeb5ce79d554f18dc2b03cf5d07199c766b990b0c540bca0",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/el-form-item-cOr4SMh0.css",
+      "bytes": 3939,
+      "sha256": "4c0bbbfe280a5e279b9278ea96bf28f8bb989f2af7098731aebb0174f8a8c578",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/el-scrollbar-IaEzL0Sf.css",
+      "bytes": 3518,
+      "sha256": "b01491855f14d3f40b6f2b869d3c6a070083e4f7eade14d35fbfeb5c41cb500a",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/chat1-KSAzVIHP.jpg",
+      "bytes": 509364,
+      "sha256": "3fdadb71595ccd0a7a7ed9e8bcc934ef5be03ffa4cbd3d7049390f5ff3a2c2f3",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/placeholder-p7UPlNX1.webp",
+      "bytes": 8336,
+      "sha256": "f63b2a4a6f8399338c68fc8cce17501813051a17dca0a31f20ee8ddb65d97e29",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/assets/GF2_PMS2__L1A0001821754-MSS2_label-uPYl3yWD.png",
+      "bytes": 1166944,
+      "sha256": "6a5f431d4f83ba748ef6def82dfbd10272ae0ec0bcfce3adb8bc196cad83ca94",
+      "mode": "0o644"
+    },
+    {
+      "path": "data/web/dist/favicon.ico",
+      "bytes": 4286,
+      "sha256": "db74ab0b78338c1f778f8398c45f4103c99aea0e845a3118a7750b4eeafd3445",
+      "mode": "0o644"
+    },
+    {
+      "path": "etc/nginx/conf.d/web.conf",
+      "bytes": 798,
+      "sha256": "66304d895c6100977c92cbee0383ae061907dbb646a3bd97bac1e3bf543c75df",
+      "mode": "0o644"
+    }
+  ],
+  "server_hashes_verified": true,
+  "credential_scan": "No unresolved secret candidates. Four embedded OSS signed URLs expired in April 2024; original bytes retained.",
+  "backend_and_database_included": false,
+  "frontend_development_source_included": false,
+  "nginx_service_state": "active; boot autostart disabled",
+  "backup_reason": "Baseline before adding the rainstorm warning tab",
+  "expired_signed_url_review": [
+    {
+      "file": "frontend/dist/assets/index-Me4TUIQZ.js",
+      "expires_at_utc": "2024-04-17T05:59:43+00:00"
+    },
+    {
+      "file": "frontend/dist/assets/index-Me4TUIQZ.js",
+      "expires_at_utc": "2024-04-17T06:02:42+00:00"
+    },
+    {
+      "file": "frontend/dist/assets/index-Me4TUIQZ.js",
+      "expires_at_utc": "2024-04-17T06:02:42+00:00"
+    },
+    {
+      "file": "frontend/dist/assets/index-Me4TUIQZ.js",
+      "expires_at_utc": "2024-04-17T06:02:42+00:00"
+    }
+  ]
+}

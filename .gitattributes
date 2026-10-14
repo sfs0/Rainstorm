@@ -1,0 +1,10 @@
+# Preserve exact bytes of captured server files, including their line endings.
+frontend/dist/** -text -whitespace
+deployment/nginx/web.conf -text -whitespace
+snapshots/*.tar.gz -text
+.gitattributes text eol=lf
+.gitignore text eol=lf
+scripts/*.sh text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.json text eol=lf

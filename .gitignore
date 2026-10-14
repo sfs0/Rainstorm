@@ -1,0 +1,11 @@
+# Recovery credentials and local work must never be published.
+.env
+.env.*
+*.pem
+*.key
+recovery-key*.json
+*-private/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
